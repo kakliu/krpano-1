@@ -141,6 +141,9 @@
         z-index: -1;
         visibility: hidden;
     }
+   #player1,#player2,#player3,#player4 {
+     display: none;
+   }
     ::-webkit-selection {
   background:none
 }
@@ -164,13 +167,20 @@
         <img src="images/wifi.png" id="tip" alt="">
         <img src="images/logo.png" id="logo" alt="">
     </div>
-    <video id="player" src="video/video0.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
-    <!-- <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="./video/bg-music.mp3" style="position: fixed;top: 0"> -->
+    <video id="player1" class="player" src="video/video0.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
+    <video id="player2" class="player" src="video/video1.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
+    <video id="player3" class="player" src="video/video2.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
+    <video id="player4" class="player" src="video/video3.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
+    <video id="player5" class="player" src="video/video4.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
     <div class="audio-panel">
       <audio id="bg-music" controls="controls" loop="loop" preload="auto" src="./video/bg_music.mp3">
-      <!-- <audio id="end-music" controls="controls" loop="loop" preload="auto" src="./video/end_music.mp3"> -->
+      <audio id="end-music" controls="controls" loop="loop" preload="auto" src="./video/end_music.mp3">
 
-      <audio id="guide" controls="controls" preload="auto" src="./video/guide0.mp3">
+      <audio id="guide0" controls="controls" preload="auto" src="./video/guide0.mp3">
+      <audio id="guide1" controls="controls" preload="auto" src="./video/guide1.mp3">
+      <audio id="guide2" controls="controls" preload="auto" src="./video/guide2.mp3">
+      <audio id="guide3" controls="controls" preload="auto" src="./video/guide3.mp3">
+      <audio id="guide4" controls="controls" preload="auto" src="./video/guide4.mp3">
     </div>
     <div class="end">
         <img src="images/banner.png" id="banner" alt="">
@@ -209,14 +219,14 @@
         </script>
     </div>
     <script>
-    var player = document.getElementById('player');
+    // var player = document.getElementById('player');
     var bgMusic = document.getElementById('bg-music');
     var endMusic = document.getElementById('end-music');
-    var guide = document.getElementById('guide');
+    var guide = document.getElementById('guide0');
 
     function sceneSwitch() {
         $('#pano').css('opacity', '1');
-        $('#player').css({
+        $('.player').css({
             'opacity': '0',
             'z-index': '-1'
         });
@@ -227,30 +237,32 @@
             'opacity': '0',
             'z-index': '0'
         });
-        $('#player').css({
+        $('.player').css('display','none');
+        $('#player'+scene).css({
+            'display': 'block',
             'opacity': '1',
             'z-index': '999'
         });
+        var player = document.getElementById('player'+scene);
         player.play();
         bgMusic.pause();
-        guide.pause();
+        // guide.pause();
         if(scene >= 5) {
-          bgMusic.setAttribute('src','video/end_music.mp3');
-          bgMusic.play();
+          endMusic.play();
         }
+        guide.pause();
         var timer = setInterval(function() {
             if (player.ended) {
               clearInterval(timer);
               sceneSwitch();
 
-              if(scene < 5) {
-                guide.setAttribute('src','./video/guide'+scene+'.mp3');
+              if(scene < 5){
+                guide = document.getElementById('guide'+scene);
+                guide.currentTime = 0;
                 guide.play();
-                setTimeout(function(){
-                  player.setAttribute('src','video/video'+scene+'.mp4');
-                },500);
+
               }else{
-                $('#player').css({
+                $('.player').css({
                     'opacity': '0',
                     'z-index': '-1'
                 });
@@ -332,6 +344,7 @@
                             'z-index': -1
                         });
                         bgMusic.play();
+                        guide =  document.getElementById('guide0');
                         guide.play();
                     }, 1000);
                 }
@@ -343,12 +356,12 @@
         }
     });
     $('#review').click(function(){
-       player.setAttribute('src','video/video0.mp4');
-       guide.setAttribute('src','./video/guide0.mp3');
-       guide.play();
        $('.end').css('visibility','hidden');
-       bgMusic.setAttribute('src','video/bg_music.mp3');
        bgMusic.play();
+       endMusic.pause();
+       guide =  document.getElementById('guide0');
+       guide.currentTime = 0;
+       guide.play();
     })
     </script>
 </body>
