@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>市面上最美的女程序员</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <style>
+    @-ms-viewport {
+        width: device-width;
+    }
+
+    @media only screen and (min-device-width:800px) {
+        html {
+            overflow: hidden;
+        }
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #FFFFFF;
+        background-color: #000000;
+    }
+
+    video {
+        position: absolute;
+        z-index: -2;
+        width: 100%;
+        opacity: 0;
+        transition: opacity .4s ease-in, z-index .4s ease-in;
+    }
+
+    .loader {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        color: #000;
+        text-align: center;
+        -webkit-transition: opacity .4s ease-out, z-index .4s ease-out;
+        -moz-transition: opacity .4s ease-out, z-index .4s ease-out;
+        -ms-transition: opacity .4s ease-out, z-index .4s ease-out;
+        transition: opacity .4s ease-out, z-index .4s ease-out;
+    }
+
+    .loader img {
+        display: block;
+        margin: auto;
+    }
+
+    .loader .solar {
+        width: 100%;
+    }
+
+    .loader .solar-hide {
+        display: none;
+    }
+
+    .loader #tip {
+        width: 50%;
+    }
+
+    .loader #logo {
+        margin-top: 50%;
+        width: 20%;
+    }
+
+    #pano {
+        position: relative;
+        z-index: 9;
+    }
+
+    .end {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: absolute;
+        z-index: 1;
+        visibility: hidden;
+    }
+
+    .end #banner {
+        width: 98%;
+        margin: auto;
+        display: block;
+    }
+
+    #end-solar {
+        display: block;
+        width: 30%;
+        margin: auto;
+    }
+
+    .end a {
+        display: inline-block;
+        width: 24%;
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+    }
+
+    .end a img {
+        width: 100%;
+    }
+
+    .end #join {
+        margin: 0 10% 0 20%;
+    }
+
+    .end #end-logo {
+        width: 20%;
+        display: block;
+        margin: 25% auto 0;
+    }
+
+    #thumb {
+        width: 0;
+        height: 0;
+        margin: 0;
+        position: absolute;
+    }
+    .gallery {
+        width: 100px;
+        height: 100px;
+        margin: 40% auto 0;
+    }
+    .audio-panel {
+        position: fixed;
+        z-index: -1;
+        visibility: hidden;
+    }
+    ::-webkit-selection {
+  background:none
+}
+::-moz-selection {
+  background:none
+}
+::selection {
+  background:none
+}
+    </style>
+</head>
+
+<body>
+    <img src="./images/seo.jpg" id="thumb" alt="logo" >
+    <div class="loader">
+        <div class="gallery">
+          <img src="./images/1.gif" alt="" class="solar" id="status1">
+          <img src="./images/4.gif" alt="" class="solar solar-hide" id="status2">
+        </div>
+        <p id="progress">0%</p>
+        <img src="images/wifi.png" id="tip" alt="">
+        <img src="images/logo.png" id="logo" alt="">
+    </div>
+    <video id="player" src="video/video0.mp4" x-webkit-airplay="true" webkit-playsinline="true" preload="auto"></video>
+    <!-- <audio autoplay="autoplay" controls="controls" loop="loop" preload="auto" src="./video/bg-music.mp3" style="position: fixed;top: 0"> -->
+    <div class="audio-panel">
+      <audio id="bg-music" controls="controls" loop="loop" preload="auto" src="./video/bg_music.mp3">
+      <!-- <audio id="end-music" controls="controls" loop="loop" preload="auto" src="./video/end_music.mp3"> -->
+
+      <audio id="guide" controls="controls" preload="auto" src="./video/guide0.mp3">
+    </div>
+    <div class="end">
+        <img src="images/banner.png" id="banner" alt="">
+        <img src="images/5.gif" id="end-solar" alt="">
+        <a href="job/index.html" id="join"><img src="images/enter.png" alt=""></a>
+        <a href="javascript:;" id="review"><img src="images/rep.png" alt=""></a>
+        <img src="images/logo.png" id="end-logo" alt="">
+    </div>
+    <script src="tour.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/preload.js"></script>
+    <div id="pano" style="width:100%;height:100%;">
+        <noscript>
+            <table style="width:100%;height:100%;">
+                <tr style="vertical-align:middle;">
+                    <td>
+                        <div style="text-align:center;">ERROR:
+                            <br/>
+                            <br/>Javascript not activated
+                            <br/>
+                            <br/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </noscript>
+        <script>
+        embedpano({
+            swf: "tour.swf",
+            xml: "tour.xml",
+            target: "pano",
+            html5: "auto",
+            mobilescale: 1.0,
+            passQueryParameters: true
+        });
+        </script>
+    </div>
+    <script>
+    var player = document.getElementById('player');
+    var bgMusic = document.getElementById('bg-music');
+    var endMusic = document.getElementById('end-music');
+    var guide = document.getElementById('guide');
+
+    function sceneSwitch() {
+        $('#pano').css('opacity', '1');
+        $('#player').css({
+            'opacity': '0',
+            'z-index': '-1'
+        });
+    }
+
+    function videoPlay(scene) {
+        $('#pano').css({
+            'opacity': '0',
+            'z-index': '0'
+        });
+        $('#player').css({
+            'opacity': '1',
+            'z-index': '999'
+        });
+        player.play();
+        bgMusic.pause();
+        guide.pause();
+        if(scene >= 5) {
+          bgMusic.setAttribute('src','video/end_music.mp3');
+          bgMusic.play();
+        }
+        var timer = setInterval(function() {
+            if (player.ended) {
+              clearInterval(timer);
+              sceneSwitch();
+
+              if(scene < 5) {
+                guide.setAttribute('src','./video/guide'+scene+'.mp3');
+                guide.play();
+                setTimeout(function(){
+                  player.setAttribute('src','video/video'+scene+'.mp4');
+                },500);
+              }else{
+                $('#player').css({
+                    'opacity': '0',
+                    'z-index': '-1'
+                });
+                $('.end').css('visibility', 'visible');
+              }
+              bgMusic.play();
+            }
+        }, 10);
+    }
+
+    var preload = new Preload({
+        sources: {
+            imgs: {
+                source: [
+                    "./images/1.gif",
+                    "./images/4.gif",
+                    "./images/sisi.png",
+                    "./images/wudi.png",
+                    "./images/haohao.png",
+                    "./images/yinyin.png",
+                    "./images/banner.png",
+                    "./images/enter.png",
+                    "./images/rep.png",
+                    "./images/5.gif",
+                    "./panos/vr.tiles/preview.jpg",
+                    "./panos/vr.tiles/vr/pano_b.jpg",
+                    "./panos/vr.tiles/vr/pano_d.jpg",
+                    "./panos/vr.tiles/vr/pano_f.jpg",
+                    "./panos/vr.tiles/vr/pano_l.jpg",
+                    "./panos/vr.tiles/vr/pano_r.jpg",
+                    "./panos/vr.tiles/vr/pano_u.jpg",
+                ],
+                callback: function() {
+                    console.log("done");
+                }
+            },
+            audio: {
+                source: [
+                   "./video/bg_music.mp3",
+                   "./video/end_music.mp3",
+                   "./video/guide0.mp3",
+                   "./video/guide1.mp3",
+                   "./video/guide2.mp3",
+                   "./video/guide3.mp3",
+                   "./video/guide4.mp3",
+
+                ],
+                callback: function() {
+                    console.log('done');
+                }
+            },
+            video: {
+                source: [
+                   "./video/video0.mp4",
+                   "./video/video1.mp4",
+                   "./video/video2.mp4",
+                   "./video/video3.mp4",
+                   "./video/video4.mp4",
+
+                ],
+                callback: function() {
+                    console.log('done');
+                }
+            }
+        },
+        loadingOverTime: 100,
+        loadingOverTimeCB: function() {
+            $('#progress').text("资源加载超时");
+        },
+        progress: function(completedCount, total) {
+            var percentage = Math.floor((completedCount / total) * 100);
+            if (percentage > 60) {
+                $('#status1').addClass('solar-hide');
+                $('#status2').removeClass('solar-hide');
+                if (percentage >= 100) {
+                    setTimeout(function() {
+                        $('.loader').css({
+                            'opacity': '0',
+                            'z-index': -1
+                        });
+                        bgMusic.play();
+                        guide.play();
+                    }, 1000);
+                }
+            }
+            $('#progress').text(percentage + '%');
+        },
+        completeLoad: function() {
+            console.log("已完成所有加载项");
+        }
+    });
+    $('#review').click(function(){
+       player.setAttribute('src','video/video0.mp4');
+       guide.setAttribute('src','./video/guide0.mp3');
+       guide.play();
+       $('.end').css('visibility','hidden');
+       bgMusic.setAttribute('src','video/bg_music.mp3');
+       bgMusic.play();
+    })
+    </script>
+</body>
+
+</html>

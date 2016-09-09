@@ -1,0 +1,167 @@
+<krpano version="1.19" title="欢迎来到赤子城">
+
+	<include url="skin/vtourskin.xml" />
+    <include url="hotspot_style/hotspot_style.xml" />
+    <include url="Welcome/welcome.xml" />
+    <include url="gyro/gyro.xml" />
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings
+		           name="skin"
+		           maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_zoombuttons="false"
+	               gyro="true"
+	               webvr="true"
+	               littleplanetintro="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="loading..."
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+
+	<!-- startup action - load the first scene -->
+
+<plugin name="gyro" devices="html5" keep="true"
+	enabled="false"
+	camroll="true"
+	fraction="0.0"
+	touch_mode="full"
+	sensor_mode="1"
+	softstart="0.5"
+	autocalibration="true"
+	onunavailable=""
+	onenable=""
+	ondisable=""
+	/>
+<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+		set(hotspot[spot2].visible,false);
+		set(hotspot[spot3].visible,false);
+		set(hotspot[spot4].visible,false);
+		set(hotspot[spot5].visible,false);
+		set(hotspot[tip2].visible,false);
+		set(hotspot[tip3].visible,false);
+		set(hotspot[tip4].visible,false);
+		set(hotspot[tip5].visible,false);
+	    set(plugin[gyro].enabled,true);
+
+	</action>
+
+	<action name="hide1">
+       set(hotspot[spot1].visible,false);
+       set(hotspot[spot2].visible,true);
+       set(hotspot[tip1].visible,false);
+       set(hotspot[tip2].visible,true);
+	</action>
+    <action name="hide2">
+       set(hotspot[spot2].visible,false);
+       set(hotspot[spot3].visible,true);
+       set(hotspot[tip2].visible,false);
+       set(hotspot[tip3].visible,true);
+	</action>
+	<action name="hide3">
+       set(hotspot[spot3].visible,false);
+       set(hotspot[spot4].visible,true);
+       set(hotspot[tip3].visible,false);
+       set(hotspot[tip4].visible,true);
+	</action>
+	<action name="hide4">
+       set(hotspot[spot4].visible,false);
+       set(hotspot[spot5].visible,true);
+       set(hotspot[tip4].visible,false);
+       set(hotspot[tip5].visible,true);
+	</action>
+	<action name="hide5">
+       set(hotspot[spot5].visible,false);
+       set(hotspot[tip5].visible,false);
+			 set(hotspot[spot1].visible,true);
+       set(hotspot[tip1].visible,true);
+	</action>
+
+
+
+	<scene name="scene_vr" title="vr" onstart="" havevrimage="true" thumburl="panos/vr.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="434.797" vlookat="8.805" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/vr.tiles/preview.jpg" />
+
+		<image type="CUBE" multires="true" tilesize="512" if="!webvr.isenabled">
+			<level tiledimagewidth="2304" tiledimageheight="2304">
+				<cube url="panos/vr.tiles/%s/l2/%v/l2_%s_%v_%h.jpg" />
+			</level>
+			<level tiledimagewidth="1152" tiledimageheight="1152">
+				<cube url="panos/vr.tiles/%s/l1/%v/l1_%s_%v_%h.jpg" />
+			</level>
+		</image>
+
+		<image if="webvr.isenabled">
+			<cube url="panos/vr.tiles/vr/pano_%s.jpg" />
+		</image>
+
+		<!-- place your scene hotspots here -->
+		<hotspot name="spot1" style="hotspot_ani_Ahead" ath="46.504" atv="21.532" onclick="js(videoPlay(1));hide1" />
+		<hotspot name="spot2" style="hotspot_ani_Ahead" ath="19.718" atv="21.686" onclick="js(videoPlay(2));hide2" />
+		<hotspot name="spot3" style="hotspot_ani_Ahead" ath="-100.770" atv="30.906" onclick="js(videoPlay(3));hide3" />
+		<hotspot name="spot4" style="hotspot_ani_Ahead" ath="-135.428" atv="38.025" onclick="js(videoPlay(4));hide4" />
+		<hotspot name="spot5" style="hotspot_ani_Ahead" ath="-246.023" atv="40.872" onclick="js(videoPlay(5));hide5" />
+		 <hotspot name="tip1" url="images/sisi.png"  ath="70.023" atv="-2.328" distorted="true" width="260" height=" 100" scale="1" depth="800" polyline="false" scaleflying="true" tx="0" ty="0" tz="0" zoom="true" enabled="false" onclick="js(videoPlay(1));hide1"/>
+         <hotspot name="tip2" url="images/wudi.png"  ath="-1.023" atv="5.328" distorted="true" width="240" height=" 100" scale="1" depth="800" polyline="false" scaleflying="true" tx="0" ty="0" tz="0" zoom="true" enabled="false" onclick="js(videoPlay(1));hide1"/>
+         <hotspot name="tip3" url="images/haohao.png"  ath="-92.023" atv="13.528" distorted="true" width="240" height=" 100" scale="1" depth="800" polyline="false" scaleflying="true" tx="0" ty="0" tz="0" zoom="true" enabled="false" onclick="js(videoPlay(1));hide1"/>
+         <hotspot name="tip4" url="images/yinyin.png"  ath="-160.023" atv="20.328" distorted="true" width="260" height=" 100" scale="1" depth="800" polyline="false" scaleflying="true" tx="0" ty="0" tz="0" zoom="true" enabled="false" onclick="js(videoPlay(1));hide1"/>
+         <hotspot name="tip5" url="images/chahen.png"  ath="-215.023" atv="22.328" distorted="true" width="240" height=" 100" scale="1" depth="800" polyline="false" scaleflying="true" tx="0" ty="0" tz="0" zoom="true" enabled="false" onclick="js(videoPlay(1));hide1"/>
+
+	</scene>
+
+
+</krpano>

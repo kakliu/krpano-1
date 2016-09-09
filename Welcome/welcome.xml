@@ -1,0 +1,103 @@
+<krpano>
+
+
+<layer name="Welcome_container"
+       preload="true"
+       alpha="1"
+       onloaded="tween(alpha,1.0);"
+       handcursor="true"
+       enabled="true"
+       children="true"
+       visible="true"
+       zorder="90"
+       type="container"
+       maskchildren="true"
+       keep="true"
+       width="100%"
+       height="100%"
+       bgcolor="0x000000"
+       bgalpha="0" >
+ 
+<layer name="Welcome_logo"
+       zorder="100"
+       keep="true"
+       x="0"
+       y="0"
+       align="center"
+       url="%SWFPATH%/Welcome/Welcome.png"
+       scale="1"
+       alpha="0"
+       onloaded="tween(alpha,1.0);
+                 tween(layer[Welcome_title].alpha,1.0);
+                 Welcome_resize(get(name));"
+       onclick="tween(layer[Welcome_container].oy,2500,1);
+                delayedcall(2,set(layer[Welcome_container].enabled,false);
+                set(layer[Welcome_container].visible,false);
+                stopdelayedcall(startpic1);stopdelayedcall(startpic2);"
+       enabled="false" />
+ 
+<layer name="Welcome_title"
+       background="true"
+       backgroundcolor="0x999999"
+       roundedge="10"
+       backgroundalpha="0"
+       border="true"
+       bordercolor="0x999999"
+       borderalpha="0"
+       borderwidth="4.0"
+       glow="0"
+       glowcolor="0xCCCCCC"
+       visible="true"
+       keep="true"
+       alpha="0"
+       onloaded=""
+       children="false"
+       zorder="100"
+       autowidth="auto"
+       height="40"
+       url="%SWFPATH%/plugins/textfield.swf"
+       html=""
+       align="center"
+       x="0"
+       y="150"
+       css="text-align:center; color:#9B8179; font-family:SimHei; font-weight:bold; font-size:32px;"
+       onclick="tween(layer[Welcome_container].oy,2500,1);
+                delayedcall(2,set(layer[Welcome_container].enabled,false);
+                set(layer[Welcome_container].visible,false);
+                stopdelayedcall(startpic1);stopdelayedcall(startpic2);"
+       enabled="false"
+ 
+/>
+ 
+</layer>
+ 
+<events name="startlogoevents" keep="true"
+        onloadcomplete="
+              ifnot(layer[Welcome_logo].enabled,
+              set(layer[Welcome_logo].enabled,true);
+              set(layer[Welcome_title].enabled,true);
+              delayedcall(startpic1,5,tween(layer[Welcome_container].oy,2500,1));
+              delayedcall(startpic2,6,set(layer[Welcome_container].enabled,false);
+              set(layer[Welcome_container].visible,false));)
+"/>
+
+
+<!-- 使用屏幕宽度或高度的百分之九十 -->
+
+<action name="Welcome_resize">
+        div(aspect, layer[%1].imagewidth, layer[%1].imageheight); 
+        mul(new_width, stagewidth, 0.3);
+        div(new_height, new_width, aspect); 
+        mul(max_height, stageheight, 0.3); 
+        if(new_height GT max_height,
+        copy(new_height, max_height);
+        mul(new_width, new_height, aspect); 
+);
+        roundval(new_width); 
+        roundval(new_height);
+        copy(layer[%1].width, new_width); 
+        copy(layer[%1].height, new_height); 
+</action>
+<!-- 启动画面结束 -->
+
+</krpano>
